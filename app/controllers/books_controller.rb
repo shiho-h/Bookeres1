@@ -27,17 +27,16 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
-    
   end
 
   def update
-    book = Book.find(params[:id])
-    if book.update(book_params)
+    @book = Book.find(params[:id])
+    if @book.update(book_params)
 #サクセスメッセージを追加
     flash[:notice] = 'Book was successfully created.'
-    redirect_to book_path(book)
+    redirect_to book_path(@book)
+#失敗したらその場でエラーメッセージ
     else
-    
     render 'edit'
     end
  end
